@@ -1,6 +1,6 @@
-import { useCallback, useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 
-const useScrollFetch = () => {
+let useInfiniteScroller = () => {
   const [scrollFetch, setScrollFetch] = useState(true)
   let observerRef = useRef();
   const callbackRef = useCallback(node => {
@@ -12,12 +12,14 @@ const useScrollFetch = () => {
     })
     if (node) observerRef.current.observe(node)
   }, [])
-
+  let InfiniteScroll = ({ children }) => {
+    return React.Children.map(children, child => {
+      return React.cloneElement(child, { ref: callbackRef })
+    })
+  }
   return {
-    callbackRef,
-    scrollFetch,
-    setScrollFetch
+    callbackRef, scrollFetch, setScrollFetch, InfiniteScroll
   }
 }
+export default useInfiniteScroller
 
-export default useScrollFetch

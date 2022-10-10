@@ -1,3 +1,3 @@
-import useScrollFetch from "./useScrollFetch";
+import useInfiniteScroller from "./useScrollFetch"
 
-export { useScrollFetch }
+export { useInfiniteScroller }
